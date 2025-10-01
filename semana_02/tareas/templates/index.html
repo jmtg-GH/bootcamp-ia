@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestor de tareas</title>
+    <link rel="stylesheet" href="static/styles.css">
 </head>
 <body>
-    <h1>Lista de tareas</h1>
-    <form action="" method="post">
-        <input type="text" name="tareas" placeholder="Nueva tarea..." required>
-        <button type="submit">Agregar</button>
-    </form>
-    <ul>
-        {% for t in tareas %}
-            <li>{{ t }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Lista de tareas</h1>
+        <form method="post">
+            <input type="text" name="tarea" placeholder="Nueva tarea..." required>
+            <button type="submit">Agregar</button>
+        </form>
+        <ul>
+            {% for t in tareas %}
+                <li>{{ t }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 </html>
