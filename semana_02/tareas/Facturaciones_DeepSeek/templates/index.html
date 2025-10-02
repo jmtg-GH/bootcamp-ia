@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Facturas</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2980b9;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #2c3e50;
+            --success-color: #27ae60;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .app-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .form-section {
+            flex: 1;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .invoice-section {
+            flex: 2;
+            min-width: 300px;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .btn-danger { background-color: var(--accent-color); }
+        .btn-success { background-color: var(--success-color); }
+        
+        .alert {
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        
+        .alert-success { background-color: #d4edda; color: #155724; }
+        .alert-error { background-color: #f8d7da; color: #721c24; }
+        
+        .invoice-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .invoice-table th, .invoice-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .delete-btn {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Generador de Facturas</h1>
+        </div>
+    </header>
+    
+    <div class="container">
+        <!-- Mensajes flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'success' if category == 'success' else 'error' }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <div class="app-container">
+            <section class="form-section">
+                <h2>Agregar Producto</h2>
+                <form method="POST" action="{{ url_for('agregar_producto') }}">
+                    <div class="form-group">
+                        <label for="producto">Producto/Servicio:</label>
+                        <input type="text" id="producto" name="prod" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="valor">Precio Unitario:</label>
+                        <input type="number" id="valor" name="precio" min="0" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" name="unidades" min="1" required>
+                    </div>
+                    
+                    <button type="submit">Agregar Producto</button>
+                </form>
+                
+                <a href="{{ url_for('limpiar_todo') }}">
+                    <button class="btn-danger">Limpiar Todo</button>
+                </a>
+                
+                <a href="{{ url_for('generar_factura') }}">
+                    <button class="btn-success">Generar Factura</button>
+                </a>
+                
+                <a href="{{ url_for('lista_facturas') }}">
+                    <button>Ver Facturas</button>
+                </a>
+            </section>
+            
+            <section class="invoice-section">
+                <h2>Vista Previa</h2>
+                
+                {% if productos %}
+                <table class="invoice-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio</th>
+                            <th>Total</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for producto in productos %}
+                        <tr>
+                            <td>{{ producto.nombre }}</td>
+                            <td>{{ producto.unidades }}</td>
+                            <td>{{ producto.precio|moneda }}</td>
+                            <td>{{ producto.total|moneda }}</td>
+                            <td>
+                                <a href="{{ url_for('eliminar_producto', producto_id=producto.id) }}">
+                                    <button class="delete-btn">Eliminar</button>
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                
+                <div style="text-align: right;">
+                    <h3>Total: {{ total|moneda }}</h3>
+                </div>
+                {% else %}
+                <p>No hay productos agregados</p>
+                {% endif %}
+            </section>
+        </div>
+    </div>
+</body>
+</html>
