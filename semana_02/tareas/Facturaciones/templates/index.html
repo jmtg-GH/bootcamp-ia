@@ -4,26 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FACTURA</title>
-    <link rel="stylesheet" href="static/styles.css">
+    <link rel="stylesheet" href="../static/styles.css">
 </head>
 <body>
     <h2>Ingreso de datos de factura</h2>
     <div class="container">
        <form method="POST"><!-- comentario -->
             <label for="name">Nombre: </label>
-            <input type="text" name="nombre" id="name" required><br>
+            <input type="text" name="nombre" id="name" required><br><br>
             <label for="email">Correo: </label>
-            <input type="email" name="correo" id="email" required><br>
+            <input type="email" name="correo" id="email" required><br><br>
             <label for="nit">NIT: </label>
-            <input type="number" name="nitId" id="nit" required><br>
+            <input type="number" name="nitId" id="nit" required><br><br>
             <label for="factura">Número de factura: </label>
-            <input type="text" name="fact" id="factura" required><br>
+            <input type="text" name="fact" id="factura" required><br><br>
             <label for="producto">Producto: </label>
-            <input type="text" name="prod" id="producto" required><br>
+            <input type="text" name="prod" id="producto" required><br><br>
             <label for="valor">Precio: </label>
-            <input type="number" name="precio" id="valor" required><br>
+            <input type="number" name="precio" id="valor" required><br><br>
             <label for="cantidad">Unidades: </label>
-            <input type="number" name="unidades" id="cantidad" required><br>
+            <input type="number" name="unidades" id="cantidad" required><br><br>
             <button type="submit">Generar factura</button>
        </form>
        {% if datos %} 
