@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FACTURA</title>
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="../static/facturas.css">
 </head>
 <body>
-    <h2>Ingreso de datos de factura</h2>
     <div class="container">
+        <h2>Ingreso de datos de factura</h2>
        <form method="POST"><!-- comentario -->
             <label for="name">Nombre: </label>
             <input type="text" name="nombre" id="name" required><br><br>
@@ -26,6 +26,8 @@
             <input type="number" name="unidades" id="cantidad" required><br><br>
             <button type="submit">Generar factura</button>
        </form>
+    </div>
+    <div class="factura_hecha">
        {% if datos %} 
             {% if datos.error %}
                 <p style="color: crimson;">{{ datos.error }}</p>
@@ -40,7 +42,7 @@
                 <p><strong>Unidades: </strong>{{ datos.unidades }}</p>
                 <p><strong>Total a pagar: </strong>{{ datos.total }}</p>
             {% endif %}
-        {% endif %}
-    </div>    
+        {% endif %}   
+    </div>
 </body>
 </html>
