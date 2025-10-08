@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>MiniCalc</title>
+    <link rel="stylesheet" href="../static/styles.css">
+</head>
+<body>
+    <div>
+        <h2>Mini Calculadora</h2>
+        <form method="POST">
+            <label for="num1">Número 1:</label>
+            <input type="number" id="num1" name="num1" required><br><br>
+
+            <label for="num2">Número 2:</label>
+            <input type="number" id="num2" name="num2" required><br><br>
+
+            <input type="hidden" id="operacion" name="operacion">
+
+            <div class="operaciones">
+                <button type="button" onclick="seleccionarOperacion('suma')">+</button>
+                <button type="button" onclick="seleccionarOperacion('resta')">-</button>
+                <button type="button" onclick="seleccionarOperacion('multiplicacion')">x</button>
+                <button type="button" onclick="seleccionarOperacion('division')">÷</button>
+            </div>
+            <br>
+            <button type="submit">Calcular</button>
+        </form>
+        {% if resultado is not none %}
+            <h3>Resultado: {{ resultado }}</h3>
+        {% endif %}
+    </div>
+    <script>
+    function seleccionarOperacion(op) {
+        // Guardar el valor de la operación en el campo oculto
+        document.getElementById('operacion').value = op;
+
+        // Quitar la clase 'activo' de todos los botones
+        const botones = document.querySelectorAll('.operaciones button');
+        botones.forEach(b => b.classList.remove('activo'));
+
+        // Agregar la clase 'activo' al botón que se clicó
+        event.target.classList.add('activo');
+    }
+    </script>
+</body>
+</html>

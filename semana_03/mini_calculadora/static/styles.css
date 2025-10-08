@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #F9F9FF;
+    padding: 40px 20px;
+    color: #2C2C54;
+}
+
+h2 {
+    color: #5146D9;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+div {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 600px;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+input[type="number"] {
+    flex: 1;
+    padding: 12px 14px;
+    border: 2px solid #D6D3FF;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+input[type="number"]:focus {
+    border-color: #6C63FF;
+    box-shadow: 0 0 8px rgba(108, 99, 255, 0.4);
+    outline: none;
+}
+
+button {
+    background: #6C63FF;
+    color: #fff;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: #5146D9;
+    transform: translateY(-2px);
+    box-shadow: 4px 6px 12px rgba(108, 99, 255, 0.3);
+}
+
+/* Operaciones */
+.operaciones {
+    text-align: center;
+    margin: 10px 0;
+}
+
+.operaciones button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: 2px solid transparent;
+    background-color: #B8B3FF;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 8px;
+    color: #2C2C54;
+    transition: all 0.3s ease;
+}
+
+.operaciones button:hover {
+    background-color: #9D96FF;
+}
+
+.operaciones button.activo {
+    background-color: #6C63FF;
+    color: white;
+    border-color: #5146D9;
+}
+
+/* Resultado */
+h3 {
+    text-align: center;
+    margin-top: 20px;
+    color: #5146D9;
+}
+/* Animación de “rebote” o clic */
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 0 rgba(108, 99, 255, 0); }
+    50% { transform: scale(0.95); box-shadow: 0 0 10px rgba(108, 99, 255, 0.4); }
+    100% { transform: scale(1); box-shadow: 0 0 0 rgba(108, 99, 255, 0); }
+}
+
+.operaciones button:active {
+    animation: pulse 0.2s ease;
+}
