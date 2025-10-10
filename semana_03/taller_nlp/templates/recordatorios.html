@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Bot de Recordatorios</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Bot de Recordatorios</h1>
+    <p>Escribe una frase como "Recuérdame llamar a mamá a las 8" y guardaré el recordatorio.</p>
+
+    <form action="/recordatorios" method="POST">
+        <label for="frase_recordatorio">Tu recordatorio:</label><br>
+        <textarea id="frase_recordatorio" name="frase_recordatorio" rows="3" cols="50" required></textarea>
+        <br><br>
+        <button type="submit">Guardar Recordatorio</button>
+    </form>
+
+    <hr>
+
+    {% if confirmacion_recordatorio %}
+        <h2>Estado del Recordatorio:</h2>
+        <p style="background-color: #f3e5f5; border-left: 5px solid #9c27b0; padding: 15px; font-size: 1.2em;">
+            {{ confirmacion_recordatorio }}
+        </p>
+    {% endif %}
+
+    <a href="/">Volver al menú principal</a>
+
+</body>
+</html>

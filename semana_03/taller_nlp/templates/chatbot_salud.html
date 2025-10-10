@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Chatbot de Salud</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Chatbot Básico de Salud</h1>
+    <p>Describe tus síntomas y te daré una recomendación simple.</p>
+
+    <!-- Este formulario enviará los datos a la misma URL (/chatbot-salud)
+         usando el método POST. Aún no lo hemos programado en Flask, pero lo haremos. -->
+    <form action="/chatbot-salud" method="POST">
+        <label for="sintomas">Tus síntomas:</label><br>
+        <!-- Usamos un <textarea> para que el usuario pueda escribir frases largas.
+             Es importante el atributo 'name' para que Python lo identifique. -->
+        <textarea id="sintomas" name="sintomas" rows="4" cols="50" required></textarea>
+        <br><br>
+        <button type="submit">Obtener recomendación</button>
+    </form>
+
+    <hr>
+
+    <!-- Si la variable 'respuesta' que nos pasó Flask existe,
+        mostramos este bloque con el resultado. -->
+    {% if respuesta %}
+        <h2>Recomendación:</h2>
+        <p style="background-color: #f0f0f0; border-left: 5px solid #007bff; padding: 15px;">
+            {{ respuesta }}
+        </p>
+    {% endif %}
+
+    <a href="/">Volver al menú principal</a>
+
+</body>
+</html>

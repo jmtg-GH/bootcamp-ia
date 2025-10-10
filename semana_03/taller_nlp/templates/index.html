@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Taller de Aplicaciones NLP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Bienvenido a mi Taller de Aplicaciones con Lenguaje Natural</h1>
+    <p>Selecciona una de las herramientas para comenzar:</p>
+
+    <ul>
+        <!-- Este es un enlace. La etiqueta <a> significa "anchor" (ancla).
+             El atributo 'href' le dice al navegador a qué URL debe ir
+             cuando se hace clic. Aún no hemos creado esta página, ¡pero lo haremos pronto! -->
+        <li>
+            <a href="/chatbot-salud">Chatbot Básico de Salud</a>
+        </li>
+        
+        <li>
+            <a href="/asistente-clima">Asistente Meteorológico Textual</a>
+        </li>
+
+        <li>
+            <a href="/clasificador-animales">Clasificador de Animales por Descripción</a>
+        </li>
+
+        <li>
+            <a href="/pedidos-comida">Asistente de Pedidos de Comida</a>
+        </li>
+
+        <li>
+            <a href="/recordatorios">Bot de Recordatorios</a>
+        </li>
+    </ul>
+
+</body>
+</html>

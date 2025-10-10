@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clasificador de Animales</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Clasificador de Animales por Descripción</h1>
+    <p>Describe un animal (ej: "Tiene cuatro patas, ladra y cuida la casa") y adivinaré cuál es.</p>
+
+    <form action="/clasificador-animales" method="POST">
+        <label for="descripcion">Descripción del animal:</label><br>
+        <textarea id="descripcion" name="descripcion" rows="4" cols="50" required></textarea>
+        <br><br>
+        <button type="submit">Adivinar Animal</button>
+    </form>
+
+    <hr>
+
+    {% if animal_adivinado %}
+        <h2>Mi Adivinanza:</h2>
+        <p style="background-color: #e8f5e9; border-left: 5px solid #4caf50; padding: 15px; font-size: 1.2em;">
+            {{ animal_adivinado }}
+        </p>
+    {% endif %}
+
+    <a href="/">Volver al menú principal</a>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Asistente Meteorológico</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Asistente Meteorológico Textual</h1>
+    <p>Escribe una pregunta sobre el clima (ej: "¿Va a llover hoy?", "Hace calor en Bogotá?") y te daré una respuesta simulada.</p>
+
+    <form action="/asistente-clima" method="POST">
+        <label for="pregunta_clima">Tu pregunta:</label><br>
+        <textarea id="pregunta_clima" name="pregunta_clima" rows="3" cols="50" required></textarea>
+        <br><br>
+        <button type="submit">Consultar Clima</button>
+    </form>
+
+    <hr>
+
+    {% if respuesta_clima %}
+        <h2>Pronóstico:</h2>
+        <p style="background-color: #e3f2fd; border-left: 5px solid #2196f3; padding: 15px;">
+            {{ respuesta_clima }}
+        </p>
+    {% endif %}
+
+    <a href="/">Volver al menú principal</a>
+
+</body>
+</html>
