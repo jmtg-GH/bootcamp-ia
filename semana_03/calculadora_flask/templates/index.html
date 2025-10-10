@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Física</title>
+</head>
+<body>
+    <h1>Calculadora de la Segunda Ley de Newton (F = m * a)</h1>
+    
+    <!-- Este es nuestro formulario. Envía los datos a la misma página ('/')
+         usando el método POST. -->
+    <form action="" method="POST">
+        <!-- Campo para la masa. El 'name' es "masa". -->
+         <label for="masa">Masa (Kg)</label>
+         <input type="number" name="masa" id="masa" step="any" required>
+
+         <br><br>
+
+         <!-- Campo para la aceleración. El 'name' es "aceleracion". -->
+          <label for="aceleracion">Aceleración (m/s^2)</label>
+          <input type="number" name="aceleracion" id="aceleracion" step="any" required>
+
+          <br><br>
+
+          <!-- El botón que envía el formulario. -->
+           <button type="submit">Calcular fuerza</button>
+    </form>
+
+    <hr> <!-- Una línea horizontal para separar -->
+    
+    <!-- Este es el bloque mágico. Jinja2 (el motor de plantillas)
+     lo entiende. Significa: "Si la variable 'resultado' que me
+     pasaron desde Python no es None (es decir, si existe),
+     entonces muestra lo que hay dentro de este bloque". -->
+
+     {% if resultado %}
+        <h2>Resultado: </h2>
+        <p style="font-weight: bold; font-size: 1.2em;">{{ resultado }}</p>
+    {% endif %}
+</body>
+</html>
