@@ -1,0 +1,19 @@
+[
+    {
+        "pedido": [
+            {
+                "cantidad": 1,
+                "producto": "perro",
+                "subtotal": 10000
+            },
+            {
+                "cantidad": 1,
+                "producto": "gaseosa",
+                "subtotal": 4000
+            }
+        ],
+        "direccion": "Calle Wallaby",
+        "pago": "efectivo",
+        "estado": "entregado"
+    }
+]

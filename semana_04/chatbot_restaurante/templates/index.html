@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurante IA</title>
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
@@ -12,15 +12,19 @@
         <p>Haz tu pedido fácil con nuestro asistente inteligente</p>
         <a href="{{ url_for('ver_pedidos')}}" class="btn-pedidos">Ver pedidos</a>
     </header>
+
     <main class="menu-container">
         {% for nombre, datos in menu.items() %}
             <div class="card" data-producto="{{ nombre }}">
                 <img src="{{ datos.imagen }}" alt="{{ nombre }}">
-                <h3>{{ nombre }}</h3>
-                <p>${{ datos.precio }}</p>
+                <h3>{{ nombre | capitalize }}</h3>
+                <!-- CORRECCIÓN APLICADA AQUÍ -->
+                <p>${{ datos.precio | number_format }}</p>
             </div>
         {% endfor %}
     </main>
+
+    <!-- Elementos de la UI del Chatbot -->
     <div id="chatbot-icon">💬</div>
     <div id="chat-container">
         <div id="chat-box"></div>
@@ -29,5 +33,7 @@
             <button id="send-btn">Enviar</button>
         </div>
     </div>
+
+    <script src="{{ url_for('static', filename='chatBot.js') }}" defer></script>
 </body>
 </html>
